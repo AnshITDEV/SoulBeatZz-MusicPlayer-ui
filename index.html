@@ -266,11 +266,90 @@
                             </div> <!-- end main-content -->
                             
                             <div class="music-player">
-                                   music player
+                                   <div class="music-player">
+                                          <!-- LEFT: Album info -->
+                                          <div class="album">
+                                                 <img src="assets/card2img.jpeg" class="album-img">
+                                                 <div class="song-info">
+                                                        <p class="song-name">Daylight</p>
+                                                        <p class="artist-name">David Kushner</p>
+                                                 </div>
+                                                 <i class="fa-regular fa-heart"></i>
+                                          </div>
+                                   
+                                          <!-- CENTER: Player controls -->
+                                          <div class="player">
+                                                 <div class="player-controls">
+                                                        <img src="assets/player_icon1.png" class="player-control-icon">
+                                                        <img src="assets/player_icon2.png" class="player-control-icon">
+                                                        <img src="assets/player_icon3.png" class="player-control-icon play">
+                                                        <img src="assets/player_icon4.png" class="player-control-icon">
+                                                        <img src="assets/player_icon5.png" class="player-control-icon">
+                                                 </div>
+                                   
+                                                 <div class="playback-bar">
+                                                        <span class="curr-time">1:55</span>
+                                                        <input type="range" min="0" max="100" value="50" class="progress-bar">
+                                                        <span class="tot-time">3:33</span>
+                                                 </div>
+                                          </div>
+                                   
+                                          <!-- RIGHT: Extra controls -->
+                                          <div class="controls">
+                                                 <i class="fa-solid fa-volume-high"></i>
+                                                 <input type="range" min="0" max="100" value="60" class="volume-bar">
+                                          </div>
+                                   </div>
                             </div>
                             
                             </div> <!-- end main -->
-                            
+
+                            <script>
+                                   const playBtn = document.querySelector(".play");
+                                   let isPlaying = false;
+
+                                   playBtn.addEventListener("click", () => {
+                                          isPlaying = !isPlaying;
+                                          playBtn.style.transform = isPlaying ? "scale(1.1)" : "scale(1)";
+                                          playBtn.style.filter = isPlaying ? "drop-shadow(0 0 8px #ff2d2d)" : "none";
+                                   });
+                            </script>
+
+                            <script>
+                                   const cards = document.querySelectorAll(".card");
+                                   const songName = document.querySelector(".song-name");
+
+                                   cards.forEach(card => {
+                                          card.addEventListener("click", () => {
+                                                 const title = card.querySelector(".card-title");
+                                                 if (title) songName.textContent = title.textContent;
+                                          });
+                                   });
+                            </script>
+
+                            <script>
+                                   const progress = document.querySelector(".progress-bar");
+                                   let value = 0;
+
+                                   setInterval(() => {
+                                          value = (value + 1) % 100;
+                                          progress.value = value;
+                                   }, 800);
+                            </script>
+
+                            <script>
+                                   document.addEventListener("keydown", (e) => {
+                                          if (e.code === "Space") {
+                                                 e.preventDefault();
+                                                 document.querySelector(".play").click();
+                                          }
+                                   });
+                            </script>
+
+
+
+
+   
                             </body>
                             
                             </html>
